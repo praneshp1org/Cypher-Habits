@@ -11,7 +11,7 @@ class HabitDatabase {
   // create initial default data
   void createDefaultData() {
     todaysHabitList = [
-      ["Run", false],
+      ["Exercise", false],
       ["Read", false],
     ];
 
