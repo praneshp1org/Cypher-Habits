@@ -35,17 +35,17 @@ class MyAlertBox extends StatelessWidget {
           onPressed: onSave,
           child: Text(
             "Save",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
           ),
-          color: Colors.black,
+          color: Colors.green,
         ),
         MaterialButton(
           onPressed: onCancel,
           child: Text(
             "Cancel",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
           ),
-          color: Colors.black,
+          color: Colors.red,
         ),
       ],
     );

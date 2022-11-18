@@ -4,7 +4,9 @@ import 'package:habittrackertute/components/month_summary.dart';
 import 'package:habittrackertute/components/my_fab.dart';
 import 'package:habittrackertute/components/my_alert_box.dart';
 import 'package:habittrackertute/data/habit_database.dart';
+import 'package:habittrackertute/pages/about_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -121,14 +123,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          PopupMenuButton(
+              itemBuilder: ((context) => [
+                    PopupMenuItem(
+                      child: InkWell(
+                          onTap: (() {
+                            Get.off(() => AboutPage());
+                          }),
+                          child: Text('About')),
+                    )
+                  ]))
+        ],
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('HABITS '),
+            Text('CYPHER '),
             Icon(Icons.hardware),
             Text(
-              ' TRACKER',
+              ' HABITS',
               style: TextStyle(color: Colors.green),
             )
           ],
@@ -137,6 +151,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[300],
       floatingActionButton: MyFloatingActionButton(onPressed: createNewHabit),
       body: ListView(
+        physics: ScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
           // monthly summary heat map
           MonthlySummary(

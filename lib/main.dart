@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habittrackertute/pages/home_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get/get.dart';
 
 void main() async {
   // initialize hive
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      title: 'Cypher Habits',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
