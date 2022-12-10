@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habittrackertute/pages/home_page.dart';
+import 'package:habittrackertute/pages/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   // initialize hive
   await Hive.initFlutter();
 
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Cypher Habits',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: SplashScreenPage(),
       theme: ThemeData(primarySwatch: Colors.green, useMaterial3: true),
     );
   }

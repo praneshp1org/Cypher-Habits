@@ -1,10 +1,17 @@
+import 'dart:developer';
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habittrackertute/components/habit_tile.dart';
 import 'package:habittrackertute/components/month_summary.dart';
 import 'package:habittrackertute/components/my_fab.dart';
 import 'package:habittrackertute/components/my_alert_box.dart';
 import 'package:habittrackertute/data/habit_database.dart';
-import 'package:habittrackertute/pages/about_page.dart';
+import 'package:habittrackertute/pages/about_app.dart';
+// import 'package:habittrackertute/pages/onlyheat_map.dart';
+import 'package:habittrackertute/pages/strategy_guide.dart';
+import 'package:habittrackertute/pages/helper/ad_helper.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
 
@@ -19,10 +26,42 @@ class _HomePageState extends State<HomePage> {
   HabitDatabase db = HabitDatabase();
   final _myBox = Hive.box("Habit_Database");
 
+  BannerAd? _bannerAd;
+  bool _isAdLoaded = false; // flag yo halena bhane ad naauney raixa
+   Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
+
+
+
   @override
+  
   void initState() {
     // if there is no current habit list, then it is the 1st time ever opening the app
     // then create default data
+
+    //banner ad initialization
+    BannerAd(
+    adUnitId: AdHelper.bannerAdUnitId,
+    request: AdRequest(),
+    size: AdSize.banner,
+    listener: BannerAdListener(
+      onAdLoaded: (ad) {
+        setState(() {
+          _bannerAd = ad as BannerAd;
+          _isAdLoaded=true;
+        });
+      },
+      onAdFailedToLoad: (ad, err) {
+        print('Failed to load a banner ad: ${err.message}');
+        ad.dispose();
+      },
+    ),
+  ).load();
+ 
+
+    
     if (_myBox.get("CURRENT_HABIT_LIST") == null) {
       db.createDefaultData();
     }
@@ -35,6 +74,7 @@ class _HomePageState extends State<HomePage> {
     // update the database
     db.updateDatabase();
 
+    
     super.initState();
   }
 
@@ -122,19 +162,139 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: (_bannerAd!=null)?Container(width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd!)):Container(
+                height: 0,
+                ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            new Container(child: new DrawerHeader(child: new CircleAvatar(
+              child: Image.asset('assets/logo.png'),
+            )),color: Colors.white,),
+            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container (
+                // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                color: Colors.grey[300],
+                child: new Column(
+                  children: [
+                     Padding(
+                      
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>StrategyGuidePage());
+                    
+                    
+                  },
+                  child: ListTile(
+                    
+                    title: Text("Strategy guide", style: TextStyle(color: Colors.black),),
+                    subtitle: Text('"..on building new habits"', style: TextStyle(fontStyle: FontStyle.italic),),
+                    leading: Icon(Icons.electric_bolt, color: Colors.green, size: 30,),
+                  ),
+                ),
+              ),
+              
+                  ],
+                ),
+              ),
+            ), 
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container (
+                // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                color: Colors.grey[300],
+                child: new Column(
+                  children: [
+                     Padding(
+                      
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>AboutAppPage());
+                    
+                  },
+                  child: ListTile(
+                    
+                    title: Text("About app", style: TextStyle(color: Colors.black),),
+                    subtitle: Text('"..how does it work?"', style: TextStyle(fontStyle: FontStyle.italic),),
+                    leading: Icon(Icons.info, color: Colors.green, size: 30,),
+                  ),
+                ),
+              ),
+              
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container (
+                // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                color: Colors.grey[300],
+                child: new Column(
+                  children: [
+                     Padding(
+                      
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GestureDetector(
+                  onTap: () {
+                    
+                    
+                  },
+                  child: ListTile(
+                    
+                    title: Text("Rate App", style: TextStyle(color: Colors.black),),
+                    subtitle: Text('Your reviews and feedbacks are always welcomed!', style: TextStyle(fontStyle: FontStyle.italic),),
+                    leading: Icon(Icons.rate_review, color: Colors.green, size: 30,),
+                  ),
+                ),
+              ),
+              
+              
+                  ],
+                ),
+              ),
+            ),
+
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Container (
+            //     // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            //     color: Colors.grey[300],
+            //     child: new Column(
+            //       children: [
+            //          Padding(
+                      
+            //     padding: const EdgeInsets.symmetric(horizontal: 5),
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         Get.to(OnlyHeatMap());
+                    
+            //       },
+            //       child: ListTile(
+                    
+            //         title: Text("Only Graph", style: TextStyle(color: Colors.black),),
+            //         subtitle: Text('This will show graoh only.', style: TextStyle(fontStyle: FontStyle.italic),),
+            //         leading: Icon(Icons.graphic_eq, color: Colors.green, size: 30,),
+            //       ),
+            //     ),
+            //   ),
+              
+              
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
       appBar: AppBar(
-        actions: [
-          PopupMenuButton(
-              itemBuilder: ((context) => [
-                    PopupMenuItem(
-                      child: InkWell(
-                          onTap: (() {
-                            Get.off(() => AboutPage());
-                          }),
-                          child: Text('About')),
-                    )
-                  ]))
-        ],
+        
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -153,6 +313,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         physics: ScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
+            
           // monthly summary heat map
           MonthlySummary(
             datasets: db.heatMapDataSet,
@@ -176,6 +337,8 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
+      
+      
     );
   }
 }
