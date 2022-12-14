@@ -28,7 +28,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       showLoader: true,
       loadingText: Text("Loading..."),
       navigator: HomePage(),
-      durationInSeconds: 5,
+      durationInSeconds: 2,
     );
   }
 }

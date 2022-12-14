@@ -4,7 +4,7 @@ class AdHelper {
 
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-7286770311640613/6163531241';
+      return 'ca-app-pub-7286770311640613/4826731984';
     }else {
       return "";
     }
@@ -12,15 +12,15 @@ class AdHelper {
 
   static String get StrategyPageBannerAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-7286770311640613/7115426931';
+      return 'ca-app-pub-7286770311640613/6444185547';
     }else {
       return "";
     }
   }
 
-  static String get GraphPageBannerAdUnitId {
+  static String get AboutPageBannerAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-7286770311640613/3038249422';
+      return 'ca-app-pub-7286770311640613/3818022205';
     }else {
       return "";
     }

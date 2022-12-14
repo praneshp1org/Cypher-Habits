@@ -21,7 +21,7 @@ BannerAd? _bannerAd;
   void initState() {
     // TODO: implement initState
     BannerAd(
-    adUnitId: AdHelper.StrategyPageBannerAdUnitId,
+    adUnitId: AdHelper.AboutPageBannerAdUnitId,
     request: AdRequest(),
     size: AdSize.banner,
     listener: BannerAdListener(

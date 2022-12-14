@@ -14,6 +14,7 @@ import 'package:habittrackertute/pages/strategy_guide.dart';
 import 'package:habittrackertute/pages/helper/ad_helper.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
+import 'package:launch_review/launch_review.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -243,7 +244,9 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: GestureDetector(
                   onTap: () {
-                    
+                    LaunchReview.launch(
+                      androidAppId: "com.praneshtechapps.cypherhabits"
+                    );
                     
                   },
                   child: ListTile(
