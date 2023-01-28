@@ -76,6 +76,7 @@ class HabitDatabase {
     // "PERCENTAGE_SUMMARY_yyyymmdd" will be the key in the database
     for (int i = 0; i < daysInBetween + 1; i++) {
       String yyyymmdd = convertDateTimeToString(
+        
         startDate.add(Duration(days: i)),
       );
 
