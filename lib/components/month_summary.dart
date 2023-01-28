@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:get/get.dart';
+import 'package:habittrackertute/components/individual_day_summary.dart';
 import 'package:habittrackertute/datetime/date_time.dart';
 
 class MonthlySummary extends StatelessWidget {
@@ -40,8 +42,9 @@ class MonthlySummary extends StatelessWidget {
           10: Color.fromARGB(255, 2, 179, 8),
         },
         onClick: (value) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(value.toString())));
+          Get.to(()=>IndividialDaySummary(dateTime: value,));
+          // ScaffoldMessenger.of(context)
+          //     .showSnackBar(SnackBar(content: Text(value.toString())));
         },
       ),
     );

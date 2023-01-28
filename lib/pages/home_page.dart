@@ -303,7 +303,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('CYPHER '),
-            Icon(Icons.hardware),
+            Icon(Icons.stream_sharp, color: Colors.green,),
             Text(
               ' HABITS',
               style: TextStyle(color: Colors.green),
@@ -316,11 +316,83 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         physics: ScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
-            
+           
           // monthly summary heat map
           MonthlySummary(
             datasets: db.heatMapDataSet,
             startDate: _myBox.get("START_DATE"),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(width: 100,),
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                    height: 16,
+                    width: 16,
+                    color:  Color.fromARGB(40, 2, 179, 8),
+                  ),
+                  SizedBox(height: 4,),
+                  Text('Less'),
+                ],
+              ),
+              SizedBox(width: 4,),
+  Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                    height: 16,
+                    width: 16,
+                    color:  Color.fromARGB(60, 2, 179, 8),
+                  ),
+                  SizedBox(height: 4,),
+                  Text(''),
+                ],
+              ),
+              SizedBox(width: 4,),
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                    height: 16,
+                    width: 16,
+                    color:  Color.fromARGB(100, 2, 179, 8),
+                  ),
+                  SizedBox(height: 4,),
+                  Text(''),
+                ],
+              ),
+              SizedBox(width: 4,),
+
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                    height: 16,
+                    width: 16,
+                    color:  Color.fromARGB(220, 2, 179, 8),
+                  ),
+                  SizedBox(height: 4,),
+                  Text(''),
+                ],
+              ),
+              // SizedBox(width: 0.1,),
+                Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                    height: 16,
+                    width: 16,
+                    color:  Color.fromARGB(255, 2, 179, 8),
+                  ),
+                  SizedBox(height: 4,),
+                  Text('More'),
+                ],
+              ), 
+              SizedBox(width: 4,),
+            ],
           ),
 
           // list of habits
