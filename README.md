@@ -1,3 +1,4 @@
 # HABITS TRACKER x FLUTTER x HiveDB
 
-![Screenshot](assets/windows.png.png)
+![Windows Screenshot](assets/windows.png)
+![Phone Screenshot](assets/mobile.png)
