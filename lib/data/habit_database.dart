@@ -10,6 +10,7 @@ class HabitDatabase {
 
   // create initial default data
   void createDefaultData() {
+
     todaysHabitList = [
       ["Exercise", false],
       ["Read", false],
@@ -26,11 +27,23 @@ class HabitDatabase {
       // set all habit completed to false since it's a new day
       for (int i = 0; i < todaysHabitList.length; i++) {
         todaysHabitList[i][1] = false;
+        // streakList[i][1]=streakList[i][1]-1;
+        // todaysHabitList[i][2]=todaysHabitList[i][2]
+        // if(todaysHabitList[i][1]==true)
+        // {
+        //   todaysHabitList[i][2]++;
+          
+
+        // }
+
+
       }
     }
     // if it's not a new day, load todays list
     else {
       todaysHabitList = _myBox.get(todaysDateFormatted());
+      
+
     }
   }
 

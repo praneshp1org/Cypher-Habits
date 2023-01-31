@@ -24,6 +24,7 @@ class HabitTile extends StatelessWidget {
       child: Slidable(
         
         endActionPane: ActionPane(
+          
           motion: const StretchMotion(),
           children: [
             // settings option
@@ -49,18 +50,31 @@ class HabitTile extends StatelessWidget {
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Row(
-            children: [
-              // checkbox
-              Checkbox(
+          child: ListTile(
+            title: Text(habitName),
+            // subtitle: (habitCompleted)?Icon(Icons.check):Icon(Icons.ads_click_sharp),
+            leading: Checkbox(
+                activeColor: Colors.green,
                 value: habitCompleted,
                 onChanged: onChanged,
               ),
-
-              // habit name
-              Text(habitName),
-            ],
+              trailing: (habitCompleted)?Icon(Icons.arrow_back_ios_new, color: Colors.black,):Icon(Icons.clear, color: Colors.red,)
           ),
+          // child: Row(
+          //   children: [
+          //     // checkbox
+          //     Checkbox(
+          //       activeColor: Colors.green,
+          //       value: habitCompleted,
+          //       onChanged: onChanged,
+          //     ),
+
+          //     // habit name
+          //     Text(habitName),
+
+              
+          //   ],
+          // ),
         ),
       ),
     );
