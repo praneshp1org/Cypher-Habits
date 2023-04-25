@@ -2,7 +2,7 @@ import 'dart:developer';
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habittrackertute/components/habit_tile.dart';
 import 'package:habittrackertute/components/month_summary.dart';
 import 'package:habittrackertute/components/my_fab.dart';
@@ -14,7 +14,7 @@ import 'package:habittrackertute/data/habit_database.dart';
 import 'package:habittrackertute/pages/helper/ad_helper.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
-import 'package:launch_review/launch_review.dart';
+// import 'package:launch_review/launch_review.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,42 +27,37 @@ class _HomePageState extends State<HomePage> {
   HabitDatabase db = HabitDatabase();
   final _myBox = Hive.box("Habit_Database");
 
-  BannerAd? _bannerAd;
-  bool _isAdLoaded = false; // flag yo halena bhane ad naauney raixa
-   Future<InitializationStatus> _initGoogleMobileAds() {
-    // TODO: Initialize Google Mobile Ads SDK
-    return MobileAds.instance.initialize();
-  }
-
-
+  // BannerAd? _bannerAd;
+  // bool _isAdLoaded = false; // flag yo halena bhane ad naauney raixa
+  //  Future<InitializationStatus> _initGoogleMobileAds() {
+  //   // TODO: Initialize Google Mobile Ads SDK
+  //   return MobileAds.instance.initialize();
+  // }
 
   @override
-  
   void initState() {
     // if there is no current habit list, then it is the 1st time ever opening the app
     // then create default data
 
     //banner ad initialization
-    BannerAd(
-    adUnitId: AdHelper.bannerAdUnitId,
-    request: AdRequest(),
-    size: AdSize.banner,
-    listener: BannerAdListener(
-      onAdLoaded: (ad) {
-        setState(() {
-          _bannerAd = ad as BannerAd;
-          _isAdLoaded=true;
-        });
-      },
-      onAdFailedToLoad: (ad, err) {
-        print('Failed to load a banner ad: ${err.message}');
-        ad.dispose();
-      },
-    ),
-  ).load();
- 
+    //   BannerAd(
+    //   adUnitId: AdHelper.bannerAdUnitId,
+    //   request: AdRequest(),
+    //   size: AdSize.banner,
+    //   listener: BannerAdListener(
+    //     onAdLoaded: (ad) {
+    //       setState(() {
+    //         _bannerAd = ad as BannerAd;
+    //         _isAdLoaded=true;
+    //       });
+    //     },
+    //     onAdFailedToLoad: (ad, err) {
+    //       print('Failed to load a banner ad: ${err.message}');
+    //       ad.dispose();
+    //     },
+    //   ),
+    // ).load();
 
-    
     if (_myBox.get("CURRENT_HABIT_LIST") == null) {
       db.createDefaultData();
     }
@@ -75,7 +70,6 @@ class _HomePageState extends State<HomePage> {
     // update the database
     db.updateDatabase();
 
-    
     super.initState();
   }
 
@@ -163,20 +157,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      bottomNavigationBar: (_bannerAd!=null)?Container(width: _bannerAd!.size.width.toDouble(),
-                height: _bannerAd!.size.height.toDouble(),
-                child: AdWidget(ad: _bannerAd!)):Container(
-                height: 0,
-                ),
+      // bottomNavigationBar: (_bannerAd!=null)?Container(width: _bannerAd!.size.width.toDouble(),
+      //           height: _bannerAd!.size.height.toDouble(),
+      //           child: AdWidget(ad: _bannerAd!)):Container(
+      //           height: 0,
+      //           ),
       // drawer: new Drawer(
-        
+
       //   child: new ListView(
       //     children: <Widget>[
       //       new Container(child: new DrawerHeader(child: new CircleAvatar(
       //         child: Image.asset('assets/logo.png'),
       //       )),color: Colors.white,),
-            
+
       //       Padding(
       //         padding: const EdgeInsets.all(8.0),
       //         child: Container (
@@ -185,27 +178,26 @@ class _HomePageState extends State<HomePage> {
       //           child: new Column(
       //             children: [
       //                Padding(
-                      
+
       //           padding: const EdgeInsets.symmetric(horizontal: 5),
       //           child: GestureDetector(
       //             onTap: () {
       //               Get.to(()=>StrategyGuidePage());
-                    
-                    
+
       //             },
       //             child: ListTile(
-                    
+
       //               title: Text("Strategy guide", style: TextStyle(color: Colors.black),),
       //               subtitle: Text('"..on building new habits"', style: TextStyle(fontStyle: FontStyle.italic),),
       //               leading: Icon(Icons.electric_bolt, color: Colors.green, size: 30,),
       //             ),
       //           ),
       //         ),
-              
+
       //             ],
       //           ),
       //         ),
-      //       ), 
+      //       ),
       //       Padding(
       //         padding: const EdgeInsets.all(8.0),
       //         child: Container (
@@ -214,22 +206,22 @@ class _HomePageState extends State<HomePage> {
       //           child: new Column(
       //             children: [
       //                Padding(
-                      
+
       //           padding: const EdgeInsets.symmetric(horizontal: 5),
       //           child: GestureDetector(
       //             onTap: () {
       //               Get.to(()=>AboutAppPage());
-                    
+
       //             },
       //             child: ListTile(
-                    
+
       //               title: Text("About app", style: TextStyle(color: Colors.black),),
       //               subtitle: Text('"..how does it work?"', style: TextStyle(fontStyle: FontStyle.italic),),
       //               leading: Icon(Icons.info, color: Colors.green, size: 30,),
       //             ),
       //           ),
       //         ),
-              
+
       //             ],
       //           ),
       //         ),
@@ -242,30 +234,29 @@ class _HomePageState extends State<HomePage> {
       //           child: new Column(
       //             children: [
       //                Padding(
-                      
+
       //           padding: const EdgeInsets.symmetric(horizontal: 5),
       //           child: GestureDetector(
       //             onTap: () {
       //               LaunchReview.launch(
       //                 androidAppId: "com.praneshtechapps.cypherhabits"
       //               );
-                    
+
       //             },
       //             child: ListTile(
-                    
+
       //               title: Text("Rate App", style: TextStyle(color: Colors.black),),
       //               subtitle: Text('Your reviews and feedbacks are always welcomed!', style: TextStyle(fontStyle: FontStyle.italic),),
       //               leading: Icon(Icons.rate_review, color: Colors.green, size: 30,),
       //             ),
       //           ),
       //         ),
-              
-              
+
       //             ],
       //           ),
       //         ),
       //       ),
-    
+
       //       // Padding(
       //       //   padding: const EdgeInsets.all(8.0),
       //       //   child: Container (
@@ -274,23 +265,22 @@ class _HomePageState extends State<HomePage> {
       //       //     child: new Column(
       //       //       children: [
       //       //          Padding(
-                      
+
       //       //     padding: const EdgeInsets.symmetric(horizontal: 5),
       //       //     child: GestureDetector(
       //       //       onTap: () {
       //       //         Get.to(OnlyHeatMap());
-                    
+
       //       //       },
       //       //       child: ListTile(
-                    
+
       //       //         title: Text("Only Graph", style: TextStyle(color: Colors.black),),
       //       //         subtitle: Text('This will show graoh only.', style: TextStyle(fontStyle: FontStyle.italic),),
       //       //         leading: Icon(Icons.graphic_eq, color: Colors.green, size: 30,),
       //       //       ),
       //       //     ),
       //       //   ),
-              
-              
+
       //       //       ],
       //       //     ),
       //       //   ),
@@ -300,48 +290,50 @@ class _HomePageState extends State<HomePage> {
       // ),
       appBar: AppBar(
         // elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: PopupMenuButton(
-              onSelected: (value){
-                if(value==1)
-                {
-                  LaunchReview.launch(androidAppId: "com.praneshtechapps.cypherhabits");
-                }
-              },
-              itemBuilder: (context)=>[
-                PopupMenuItem( 
-                  value: 1, 
-                  // row has two child icon and text.
-                  child: Row( 
-                    children: [
-                      Icon(Icons.star, color: Colors.green,),
-                      SizedBox(
-                        // sized box with width 10
-                        width: 10,
-                      ),
-                      Text("Rate App")
-                    ],
-                  ),
-                ),
-            ]),
-            // child: IconButton(onPressed: (){
-            //                         LaunchReview.launch(
-            //           androidAppId: "com.praneshtechapps.cypherhabits"
-            //         );
-            // }, icon: Icon(Icons.rate_review_outlined, color: Colors.green,)),
-          )
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        //     child: PopupMenuButton(
+        //       onSelected: (value){
+        //         if(value==1)
+        //         {
+        //           LaunchReview.launch(androidAppId: "com.praneshtechapps.cypherhabits");
+        //         }
+        //       },
+        //       itemBuilder: (context)=>[
+        //         PopupMenuItem(
+        //           value: 1,
+        //           // row has two child icon and text.
+        //           child: Row(
+        //             children: [
+        //               Icon(Icons.star, color: Colors.green,),
+        //               SizedBox(
+        //                 // sized box with width 10
+        //                 width: 10,
+        //               ),
+        //               Text("Rate App")
+        //             ],
+        //           ),
+        //         ),
+        //     ]),
+        //     // child: IconButton(onPressed: (){
+        //     //                         LaunchReview.launch(
+        //     //           androidAppId: "com.praneshtechapps.cypherhabits"
+        //     //         );
+        //     // }, icon: Icon(Icons.rate_review_outlined, color: Colors.green,)),
+        //   )
+        // ],
         // centerTitle: true,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
-            
             // mainAxisAlignment: MainAxisAlignment.,
             children: [
               Text('CYPHER '),
-              Icon(Icons.stream_sharp, color: Colors.green,),
+              Icon(
+                Icons.stream_sharp,
+                color: Colors.green,
+              ),
               Text(
                 ' HABITS',
                 style: TextStyle(color: Colors.green),
@@ -355,88 +347,113 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         physics: ScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
-           
           // monthly summary heat map
           MonthlySummary(
             datasets: db.heatMapDataSet,
             startDate: _myBox.get("START_DATE"),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal:8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(width: 100,),
+                SizedBox(
+                  width: 100,
+                ),
                 Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 25, bottom: 25, right: 20),
                       height: 16,
                       width: 16,
-                      color:  Color.fromARGB(40, 2, 179, 8),
+                      color: Color.fromARGB(40, 2, 179, 8),
                     ),
-                    SizedBox(height: 4,),
+                    SizedBox(
+                      height: 4,
+                    ),
                     Text('0'),
                   ],
                 ),
-                SizedBox(width: 4,),
-            Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
-                      height: 16,
-                      width: 16,
-                      color:  Color.fromARGB(60, 2, 179, 8),
-                    ),
-                    SizedBox(height: 4,),
-                    Text('-'),
-                  ],
+                SizedBox(
+                  width: 4,
                 ),
-                SizedBox(width: 4,),
                 Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 25, bottom: 25, right: 20),
                       height: 16,
                       width: 16,
-                      color:  Color.fromARGB(100, 2, 179, 8),
+                      color: Color.fromARGB(60, 2, 179, 8),
                     ),
-                    SizedBox(height: 4,),
+                    SizedBox(
+                      height: 4,
+                    ),
                     Text('-'),
                   ],
                 ),
-                SizedBox(width: 4,),
-          
+                SizedBox(
+                  width: 4,
+                ),
                 Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 25, bottom: 25, right: 20),
                       height: 16,
                       width: 16,
-                      color:  Color.fromARGB(220, 2, 179, 8),
+                      color: Color.fromARGB(100, 2, 179, 8),
                     ),
-                    SizedBox(height: 4,),
+                    SizedBox(
+                      height: 4,
+                    ),
                     Text('-'),
                   ],
                 ),
-                SizedBox(width: 4,),
-                  Column(
+                SizedBox(
+                  width: 4,
+                ),
+                Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 25, bottom: 25, right: 20),
                       height: 16,
                       width: 16,
-                      color:  Color.fromARGB(255, 2, 179, 8),
+                      color: Color.fromARGB(220, 2, 179, 8),
                     ),
-                    SizedBox(height: 4,),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text('-'),
+                  ],
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Column(
+                  children: [
+                    Container(
+                      padding:
+                          const EdgeInsets.only(top: 25, bottom: 25, right: 20),
+                      height: 16,
+                      width: 16,
+                      color: Color.fromARGB(255, 2, 179, 8),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
                     Text('1'),
                   ],
-                ), 
-                SizedBox(width: 4,),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
               ],
             ),
           ),
-      
+
           // list of habits
           ListView.builder(
             shrinkWrap: true,
@@ -454,8 +471,6 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      
-      
     );
   }
 }
